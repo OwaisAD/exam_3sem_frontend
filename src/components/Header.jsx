@@ -20,7 +20,7 @@ function Header({ loggedIn, setLoggedIn, setCreateAccountClicked }) {
 
             {loggedIn && role === "user" && (
               <>
-                <NavButton text="Boats" iconClass="fas fa-ship" to="userpanel" />
+                <NavButton text="Guides" iconClass="fas fa-book" to="userpanel" />
               </>
             )}
             {loggedIn && role === "admin" && (
@@ -81,7 +81,7 @@ function Header({ loggedIn, setLoggedIn, setCreateAccountClicked }) {
 
             {loggedIn && role === "user" && (
               <>
-                <NavButton text="Boats" iconClass="fas fa-ship" to="userpanel" />
+                <NavButton text="Guides" iconClass="fas fa-book" to="userpanel" />
               </>
             )}
             {loggedIn && role === "admin" && (

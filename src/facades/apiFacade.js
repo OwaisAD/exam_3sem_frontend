@@ -93,6 +93,12 @@ function apiFacade() {
     return await fetch(URL + "/users/me", options).then(handleHttpErrors);
   };
 
+  const getAllTrips = async () => {
+    const options = makeOptions("GET", true);
+
+    return await fetch(URL + "/trips", options).then(handleHttpErrors);
+  };
+
   const makeOptions = (method, addToken, body) => {
     var opts = {
       method: method,

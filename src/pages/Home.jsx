@@ -8,7 +8,7 @@ function Home() {
         <div className="content text-center">
           <span className="home-slogan">
             Welcome to
-            <br /> boats<span className="inline-home">.org</span>
+            <br /> guides<span className="inline-home">.org</span>
           </span>
         </div>
         <Outlet />

@@ -38,7 +38,7 @@ function About() {
           </div>
 
           <div className="about-right">
-            <h3>The X Team</h3>
+            <h3>The Guide Team</h3>
             <div className="persons">
               <div className="person-container">
                 <img src={Who} alt="" />

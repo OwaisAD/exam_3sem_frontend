@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Image from "../../images/ecodrive-logo.png";
+import Image from "../../images/guide-logo.png";
 
 const NavButton = ({ to, iconClass, text, onClick, isEnd, isLogo }) => {
   const NavElement = (isLogo, isEnd) => {
