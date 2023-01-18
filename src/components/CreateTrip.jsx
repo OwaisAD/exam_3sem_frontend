@@ -34,6 +34,19 @@ const CreateTrip = ({
 
   const handleCreateTrip = async (e) => {
     e.preventDefault();
+
+    if (
+      tripToBeCreated.date.year == "" ||
+      tripToBeCreated.time.hour == "" ||
+      tripToBeCreated.location == "" ||
+      tripToBeCreated.duration == "" ||
+      tripToBeCreated.packingList == "" ||
+      tripToBeCreated.guide.id == 0
+    ) {
+      alert("Please fill out the fields");
+      return;
+    }
+
     const confirmation = confirm("Are you sure you want to create trip?");
     if (!confirmation) return;
 

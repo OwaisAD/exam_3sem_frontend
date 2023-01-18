@@ -20,6 +20,17 @@ const CreateGuide = ({
 
   const handleCreateGuide = async (e) => {
     e.preventDefault();
+
+    if (
+      guideToBeCreated.gender == "" ||
+      guideToBeCreated.birthYear == "" ||
+      guideToBeCreated.profile == "" ||
+      guideToBeCreated.image == ""
+    ) {
+      alert("Please fill out the fields");
+      return;
+    }
+
     const confirmation = confirm("Are you sure you want to create guide?");
     if (!confirmation) return;
 
