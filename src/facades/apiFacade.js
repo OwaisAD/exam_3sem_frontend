@@ -140,6 +140,11 @@ function apiFacade() {
     return await fetch(URL + `/guides`, options).then(handleHttpErrors);
   };
 
+  const updateGuideOnTrip = async (guideId, tripId) => {
+    const options = makeOptions("PUT", true);
+    return await fetch(URL + `/trips/${tripId}/guide/${guideId}`, options).then(handleHttpErrors);
+  };
+
   const makeOptions = (method, addToken, body) => {
     var opts = {
       method: method,
@@ -178,6 +183,7 @@ function apiFacade() {
     getAllGuides,
     createTrip,
     createGuide,
+    updateGuideOnTrip,
   };
 }
 const facade = apiFacade();

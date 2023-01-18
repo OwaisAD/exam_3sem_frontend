@@ -33,10 +33,10 @@ const UserPanel = ({ loggedIn }) => {
               style={{
                 zIndex: "1000",
                 margin: "0 auto",
-                border: "0.5px solid red",
+                border: "0.5px solid gray",
                 borderRadius: "10px",
                 width: "400px",
-                padding: "5px",
+                padding: "10px",
                 display: "flex",
                 justifyContent: "space-around",
               }}

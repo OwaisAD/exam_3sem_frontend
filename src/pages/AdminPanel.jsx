@@ -46,7 +46,9 @@ const AdminPanel = ({ loggedIn }) => {
               style={{
                 zIndex: "1000",
                 margin: "0 auto",
-                border: "1px solid red",
+                border: "0.5px solid gray",
+                borderRadius: "10px",
+                padding: "10px",
                 width: "700px",
                 display: "flex",
                 justifyContent: "space-around",
@@ -97,7 +99,7 @@ const AdminPanel = ({ loggedIn }) => {
                 <div className="boats-container">
                   <h2>All trips</h2>
                   <input type="text" placeholder="Search for a trip" />
-                  <TripsAdminpanel tripData={tripData} setTripData={setTripData} />
+                  <TripsAdminpanel tripData={tripData} setTripData={setTripData} guidesData={guidesData}/>
                 </div>
               </>
             )}

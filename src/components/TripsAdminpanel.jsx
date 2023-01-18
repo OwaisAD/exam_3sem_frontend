@@ -1,7 +1,7 @@
 import React from "react";
 import TripTRAdmin from "./TripTRAdmin";
 
-const TripsAdminpanel = ({ tripData, setTripData }) => {
+const TripsAdminpanel = ({ tripData, setTripData, guidesData }) => {
   return (
     <div className="boats-container">
       <table className="boats-table">
@@ -20,7 +20,7 @@ const TripsAdminpanel = ({ tripData, setTripData }) => {
 
         <tbody>
           {tripData.map((trip) => (
-            <TripTRAdmin trip={trip} setTripData={setTripData}/>
+            <TripTRAdmin trip={trip} setTripData={setTripData} guidesData={guidesData}/>
           ))}
         </tbody>
       </table>

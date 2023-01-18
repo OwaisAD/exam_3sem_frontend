@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import facade from "../facades/apiFacade";
 
-const TripTRAdmin = ({ trip, setTripData }) => {
+const TripTRAdmin = ({ trip, setTripData, guidesData }) => {
   const [seeGuide, setSeeGuide] = useState(false);
   const [clickedAssigned, setClickedAssigned] = useState(false);
   const [seeTripPeople, setSeeTripPeople] = useState(false);
+  const [editingGuide, setEditingGuide] = useState(false);
+
+  const initialGuide = { id: 0 };
+  const [newGuide, setNewGuide] = useState(initialGuide);
 
   const initialPersonObject = {
     address: "",
@@ -36,17 +40,6 @@ const TripTRAdmin = ({ trip, setTripData }) => {
     console.log(freshTrip);
   };
 
-  const handleClickedAssigned = (evt) => {
-    // if (evt.target.checked) {
-    //   const confirmation = confirm("Are you sure you want to leave ths trip?");
-    //   if (!confirmation) {
-    //     return;
-    //   }
-    // }
-    //mangler lidt logik her!
-    setClickedAssigned(!clickedAssigned);
-  };
-
   const handleRemoveTrip = async (tripId) => {
     const confirmation = confirm("Are you sure you want to delete trip with id: " + tripId);
     if (!confirmation) return;
@@ -69,8 +62,40 @@ const TripTRAdmin = ({ trip, setTripData }) => {
     setTripData(updatedTrips);
   };
 
+  const onChangeGuide = (evt) => {
+    setNewGuide({ ...newGuide, ["id"]: evt.target.value });
+    console.log(newGuide);
+  };
+
+  const handleChangeGuide = async (tripId) => {
+    if (newGuide.id === 0) {
+      alert("Guide was NOT updated");
+      setEditingGuide(!editingGuide);
+      return;
+    }
+
+    const confirmation = confirm(
+      "Are you sure you want to update the guide on trip with id " + tripId + "?"
+    );
+    if (!confirmation) {
+      setNewGuide({ ...newGuide, ["id"]: 0 });
+      setEditingGuide(!editingGuide);
+      return;
+    }
+    // update guide
+    const response = await facade.updateGuideOnTrip(newGuide.id, tripId);
+    console.log("updated", response);
+    // fetch trips and refresh table
+    const refreshTable = await facade.getAllTrips();
+    setTripData(refreshTable);
+
+    setNewGuide({ ...newGuide, ["id"]: 0 });
+    setEditingGuide(!editingGuide);
+  };
+
   return (
     <>
+      {/* DISPLAYING TRIP INFORMATION ON ROW */}
       <tr key={trip.id}>
         <td>
           {trip.date.day}/{trip.date.month}/{trip.date.year}
@@ -107,6 +132,8 @@ const TripTRAdmin = ({ trip, setTripData }) => {
         </td>
       </tr>
 
+      {/* DISPLAYING A LIST OF PEOPLE */}
+
       {seeTripPeople && (
         <>
           <p>Current people</p>
@@ -137,6 +164,7 @@ const TripTRAdmin = ({ trip, setTripData }) => {
         </>
       )}
 
+      {/* DISPLAYING GUIDE */}
       {seeGuide && (
         <>
           <p>About the guide</p>
@@ -153,11 +181,41 @@ const TripTRAdmin = ({ trip, setTripData }) => {
             <td>
               <img src={trip.guide.image} alt="image of the guide" style={{ height: "150px" }} />
             </td>
+            {!editingGuide && (
+              <td
+                style={{ color: "blue", cursor: "pointer" }}
+                onClick={() => setEditingGuide(!editingGuide)}
+              >
+                Edit guide
+              </td>
+            )}
           </tr>
+
+          {editingGuide && (
+            <>
+              <p>Select new Guide</p>
+              <td>
+                <div style={{ width: "150px" }}>
+                  <select name="" id="" onChange={onChangeGuide}>
+                    <option disabled selected>
+                      Select a new guide
+                    </option>
+                    {guidesData
+                      .filter((guide) => guide.id != trip.guide.id)
+                      .map((guide) => (
+                        <option value={guide.id}>{guide.profile}</option>
+                      ))}
+                  </select>
+                  <Button onClick={() => handleChangeGuide(trip.id)}>Save</Button>
+                </div>
+              </td>
+            </>
+          )}
           <br />
         </>
       )}
 
+      {/* ASSIGNING PERSON TO TRIP */}
       {clickedAssigned && (
         <>
           <p>Please fill out the fields below to join the above trip</p>
