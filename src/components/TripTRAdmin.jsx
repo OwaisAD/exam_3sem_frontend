@@ -51,18 +51,23 @@ const TripTRAdmin = ({ trip, setTripData }) => {
     const confirmation = confirm("Are you sure you want to delete trip with id: " + tripId);
     if (!confirmation) return;
 
-    // TODO
-    console.log("DELETING");
+    const response = await facade.removeTripByTripId(tripId);
+    setTripData(response);
   };
 
   const handleRemovePersonFromTrip = async (personId, tripId) => {
-    const confirmation = confirm("Are you sure you want to delete person with id: " + personId + " from trip with id: " + tripId)
-    if(!confirmation) return
+    const confirmation = confirm(
+      "Are you sure you want to delete person with id: " +
+        personId +
+        " from trip with id: " +
+        tripId
+    );
+    if (!confirmation) return;
 
-    await facade.removePersonFromTrip(tripId, personId)
-    const updatedTrips = await facade.getAllTrips()
-    setTripData(updatedTrips)
-  }
+    await facade.removePersonFromTrip(tripId, personId);
+    const updatedTrips = await facade.getAllTrips();
+    setTripData(updatedTrips);
+  };
 
   return (
     <>
@@ -122,7 +127,7 @@ const TripTRAdmin = ({ trip, setTripData }) => {
                   className="fas fa-remove"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    handleRemovePersonFromTrip(person.id, trip.id)
+                    handleRemovePersonFromTrip(person.id, trip.id);
                   }}
                 ></i>
               </td>
