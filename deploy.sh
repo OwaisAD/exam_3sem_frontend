@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROJECT_NAME="XXXXXXX"
+PROJECT_NAME="guides"
 # DROPLET_URL="YOUR_WEBSITE_URL"
 # echo -n "please enter the project name as it appears on the server in /var/www/"
 # read -r 
