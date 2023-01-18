@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import Trip from "../components/Trip";
+import TripsUserpanel from "../components/TripsUserpanel";
 import facade from "../facades/apiFacade";
 
 const UserPanel = ({ loggedIn }) => {
@@ -8,10 +8,10 @@ const UserPanel = ({ loggedIn }) => {
   const [seeAllTrips, setSeeAllTrips] = useState(false);
 
   useEffect(() => {
-    // fetch owner data
+    // fetch trips data
     async function fetchData() {
       const response = await facade.getAllTrips();
-      setData(response);
+      setTripData(response);
     }
     fetchData();
   }, []);
@@ -52,10 +52,25 @@ const UserPanel = ({ loggedIn }) => {
             </div>
 
             {seeAllTrips && (
-              <div style={{width: "500px", margin: "0 auto", paddingTop: "15px"}}>
+              <div
+                style={{
+                  width: "500px",
+                  margin: "0 auto",
+                  paddingTop: "15px",
+                  zIndex: "1000",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
                 <input type="text" placeholder="Search trip" />
-                <div className="owners-list">
-                  {/* <Owners data={data} handleBoatsClicked={handleBoatsClicked} /> */}
+                <div>
+                  <select>
+                    <option disabled select>
+                      Filter
+                    </option>
+                    <option value="date">By year asc</option>
+                    <option value="year">By year desc</option>
+                  </select>
                 </div>
               </div>
             )}
@@ -65,7 +80,9 @@ const UserPanel = ({ loggedIn }) => {
                 <h3 className="text-white mx-auto" style={{ zIndex: "1000" }}>
                   Currently viewing trips :
                 </h3>
-                <div className="boats-list">{/* <Boat currentBoatData={currentBoatData} /> */}</div>
+                <div style={{ zIndex: "1000" }}>
+                  <TripsUserpanel tripData={tripData} />
+                </div>
               </>
             )}
 

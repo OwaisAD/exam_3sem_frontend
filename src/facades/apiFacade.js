@@ -39,6 +39,14 @@ function apiFacade() {
     return parsedJWT ? parsedJWT.name : null;
   };
 
+  const setUserId = (userid) => {
+    return localStorage.setItem("userId", userid);
+  };
+
+  const getUserId = () => {
+    localStorage.getItem("userId");
+  };
+
   const loggedIn = () => {
     const loggedIn = getToken() != null;
     return loggedIn;
@@ -61,6 +69,7 @@ function apiFacade() {
     return await fetch(URL + "/login", options)
       .then(handleHttpErrors)
       .then((res) => {
+        console.log(res);
         setToken(res.token);
         return parseJwt(res.token);
       })
@@ -99,6 +108,12 @@ function apiFacade() {
     return await fetch(URL + "/trips", options).then(handleHttpErrors);
   };
 
+  const addPersonToTrip = async (tripId, personObject) => {
+    const options = makeOptions("POST", true, personObject);
+
+    return await fetch(URL + `/trips/${tripId}/person`, options).then(handleHttpErrors);
+  };
+
   const makeOptions = (method, addToken, body) => {
     var opts = {
       method: method,
@@ -121,6 +136,7 @@ function apiFacade() {
     setToken,
     getToken,
     getRole,
+    getUserId,
     loggedIn,
     login,
     logout,
@@ -129,6 +145,8 @@ function apiFacade() {
     getUsername,
     createUser,
     updateUser,
+    getAllTrips,
+    addPersonToTrip,
   };
 }
 const facade = apiFacade();
