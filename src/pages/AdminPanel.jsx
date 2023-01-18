@@ -58,22 +58,30 @@ const AdminPanel = ({ loggedIn }) => {
               </Button>
 
               {/* CREATE A TRIP */}
-              <Button onClick={() => {
-                if(seeAllTrips || seeCreateGuide) {
-                  setSeeAllTrips(false)
-                  setSeeCreateGuide(false);
-                }
-                setSeeCreateTrip(!seeCreateTrip)
-              }}>Create trip</Button>
+              <Button
+                onClick={() => {
+                  if (seeAllTrips || seeCreateGuide) {
+                    setSeeAllTrips(false);
+                    setSeeCreateGuide(false);
+                  }
+                  setSeeCreateTrip(!seeCreateTrip);
+                }}
+              >
+                Create trip
+              </Button>
 
               {/* CREATE A GUIDE */}
-              <Button onClick={() => {
-                if(seeAllTrips || seeCreateTrip) {
-                  setSeeAllTrips(false)
-                  setSeeCreateTrip(false)
-                }
-                setSeeCreateGuide(!seeCreateGuide)
-              }}>Create guide</Button>
+              <Button
+                onClick={() => {
+                  if (seeAllTrips || seeCreateTrip) {
+                    setSeeAllTrips(false);
+                    setSeeCreateTrip(false);
+                  }
+                  setSeeCreateGuide(!seeCreateGuide);
+                }}
+              >
+                Create guide
+              </Button>
             </div>
 
             {seeAllTrips && (
@@ -81,12 +89,7 @@ const AdminPanel = ({ loggedIn }) => {
                 <div className="boats-container">
                   <h2>All trips</h2>
                   <input type="text" placeholder="Search for a trip" />
-                  <TripsAdminpanel
-                  // boatsData={boatsData}
-                  // setBoatsData={setBoatsData}
-                  // harbourData={harbourData}
-                  // ownerData={ownerData}
-                  />
+                  <TripsAdminpanel tripData={tripData} setTripData={setTripData} />
                 </div>
               </>
             )}

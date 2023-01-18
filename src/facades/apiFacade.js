@@ -114,6 +114,12 @@ function apiFacade() {
     return await fetch(URL + `/trips/${tripId}/person`, options).then(handleHttpErrors);
   };
 
+  const removePersonFromTrip = async (tripId, personId) => {
+    const options = makeOptions("DELETE", true);
+
+    return await fetch(URL + `/trips/${tripId}/person/${personId}`, options).then(handleHttpErrors);
+  };
+
   const makeOptions = (method, addToken, body) => {
     var opts = {
       method: method,
@@ -147,6 +153,7 @@ function apiFacade() {
     updateUser,
     getAllTrips,
     addPersonToTrip,
+    removePersonFromTrip,
   };
 }
 const facade = apiFacade();

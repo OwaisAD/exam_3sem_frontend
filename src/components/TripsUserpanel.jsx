@@ -31,7 +31,7 @@ const TripsUserpanel = ({ tripData }) => {
 
         <tbody>
           {tripData.map((trip) => (
-            <TripTR trip={trip} />
+            <TripTR trip={trip}/>
           ))}
         </tbody>
       </table>
