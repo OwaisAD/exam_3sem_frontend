@@ -140,10 +140,10 @@ const CreateGuide = ({
         </select>
 
         <h4 className="text-white">Enter profile (name..)</h4>
-        <input type="text" placeholder="Enter location" onChange={onChange} id="profile" />
+        <input type="text" placeholder="Enter profile" onChange={onChange} id="profile" />
 
         <h4 className="text-white">Enter image</h4>
-        <input type="text" placeholder="Enter duration" onChange={onChange} id="image" />
+        <input type="text" placeholder="Enter image url" onChange={onChange} id="image" />
 
         <Button style={{ marginTop: "5px" }} onClick={(e) => handleCreateGuide(e)}>
           Submit

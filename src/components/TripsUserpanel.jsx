@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import facade from "../facades/apiFacade";
 import TripTR from "./TripTR";
 
-const TripsUserpanel = ({ tripData }) => {
+const TripsUserpanel = ({ tripData, setTripData}) => {
   //   const [boatOwners, setBoatOwners] = useState([]);
   //   const [boatClicked, setBoatClicked] = useState("");
 
@@ -30,8 +30,8 @@ const TripsUserpanel = ({ tripData }) => {
         </thead>
 
         <tbody>
-          {tripData.map((trip) => (
-            <TripTR trip={trip}/>
+          {tripData?.map((trip) => (
+            <TripTR trip={trip} setTripData={setTripData}/>
           ))}
         </tbody>
       </table>

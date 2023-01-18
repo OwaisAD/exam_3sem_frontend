@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import facade from "../facades/apiFacade";
 
-const TripTR = ({ trip }) => {
+const TripTR = ({ trip, setTripData }) => {
   const [seeGuide, setSeeGuide] = useState(false);
   const [clickedAssigned, setClickedAssigned] = useState(false);
   const [seeTripPeople, setSeeTripPeople] = useState(false);
@@ -33,7 +33,8 @@ const TripTR = ({ trip }) => {
     }
 
     const freshTrip = await facade.addPersonToTrip(tripId, personObject);
-    console.log(freshTrip);
+    const updatedTable = await facade.getAllTrips();
+    setTripData(updatedTable);
   };
 
   const handleClickedAssigned = (evt) => {
@@ -131,7 +132,7 @@ const TripTR = ({ trip }) => {
 
       {clickedAssigned && (
         <>
-          <p>Please fill out the fields below to join the above trip</p>
+          <p>Please fill out the fields below to add participants</p>
           <tr>
             <td>
               Address: <input type="text" id="address" onChange={onChange} />

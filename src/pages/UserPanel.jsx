@@ -81,7 +81,7 @@ const UserPanel = ({ loggedIn }) => {
                   Currently viewing trips :
                 </h3>
                 <div style={{ zIndex: "1000" }}>
-                  <TripsUserpanel tripData={tripData} />
+                  <TripsUserpanel tripData={tripData} setTripData={setTripData}/>
                 </div>
               </>
             )}
