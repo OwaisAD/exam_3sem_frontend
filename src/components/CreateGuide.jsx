@@ -3,54 +3,37 @@ import { Button } from "react-bootstrap";
 import facade from "../facades/apiFacade";
 
 const CreateGuide = ({
-  guidesData,
+  seeCreateGuide,
+  setSeeCreateGuide,
   seeCreateTrip,
   setSeeCreateTrip,
-  seeAllTrips,
-  setSeeAllTrips,
-  setTripData,
+  setGuidesData,
 }) => {
   const initialState = {
-    location: "",
-    duration: "",
-    packingList: "",
-    guide: {
-      id: 0,
-    },
+    gender: "",
+    birthYear: "",
+    profile: "",
+    image: "",
   };
 
   const [guideToBeCreated, setGuideToBeCreated] = useState(initialState);
 
-  const handleCreateTrip = async (e) => {
+  const handleCreateGuide = async (e) => {
     e.preventDefault();
-    const confirmation = confirm("Are you sure you want to create trip");
+    const confirmation = confirm("Are you sure you want to create guide?");
     if (!confirmation) return;
 
-    const response = await facade.createTrip(guideToBeCreated);
-    console.log("created trip: " + response);
+    const response = await facade.createGuide(guideToBeCreated);
+    console.log("created guide: " + response);
     // setGuideToBeCreated(initialState);
     // refresh and open all trips
-    const updatedData = await facade.getAllTrips();
-    setTripData(updatedData);
+    const updatedGuideData = await facade.getAllGuides();
+    setGuidesData(updatedGuideData);
+    setSeeCreateGuide(!seeCreateGuide);
     setSeeCreateTrip(!seeCreateTrip);
-    setSeeAllTrips(!seeAllTrips);
   };
 
   const onChange = (evt) => {
-    if (evt.target.id === "date") {
-      setGuideToBeCreated({ ...guideToBeCreated, ["date"]: { year: evt.target.value } });
-      return;
-    }
-
-    if (evt.target.id === "time") {
-      setGuideToBeCreated({ ...guideToBeCreated, ["time"]: { hour: evt.target.value } });
-      return;
-    }
-
-    if (evt.target.id === "guides") {
-      setGuideToBeCreated({ ...guideToBeCreated, ["guide"]: { id: evt.target.value } });
-      return;
-    }
     setGuideToBeCreated({ ...guideToBeCreated, [evt.target.id]: evt.target.value });
   };
 
@@ -59,7 +42,7 @@ const CreateGuide = ({
       <div className="create-boat-component">
         <h2 className="text-center">Create guide</h2>
         <h4 className="text-white">Select gender</h4>
-        <select name="" id="">
+        <select name="" id="gender" onChange={onChange}>
           <option disabled selected>
             Select gender
           </option>
@@ -68,7 +51,7 @@ const CreateGuide = ({
         </select>
 
         <h4 className="text-white">Select birthyear</h4>
-        <select name="" id="">
+        <select name="" id="birthYear" onChange={onChange}>
           <option disabled selected>
             Select birthyear
           </option>
@@ -146,18 +129,12 @@ const CreateGuide = ({
         </select>
 
         <h4 className="text-white">Enter profile (name..)</h4>
-        <input type="text" placeholder="Enter location" onChange={onChange} id="location" />
+        <input type="text" placeholder="Enter location" onChange={onChange} id="profile" />
 
         <h4 className="text-white">Enter image</h4>
-        <input
-          type="text"
-          placeholder="Enter duration"
-          onChange={onChange}
-          id="duration"
-          value={guideToBeCreated.duration}
-        />
+        <input type="text" placeholder="Enter duration" onChange={onChange} id="image" />
 
-        <Button style={{ marginTop: "5px" }} onClick={(e) => handleCreateTrip(e)}>
+        <Button style={{ marginTop: "5px" }} onClick={(e) => handleCreateGuide(e)}>
           Submit
         </Button>
       </div>

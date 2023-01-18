@@ -105,7 +105,14 @@ const AdminPanel = ({ loggedIn }) => {
             {seeCreateTrip && (
               <>
                 <div className="boats-container">
-                  <CreateTrip guidesData={guidesData} seeCreateTrip={seeCreateTrip} setSeeCreateTrip={setSeeCreateTrip} seeAllTrips={seeAllTrips} setSeeAllTrips={setSeeAllTrips} setTripData={setTripData}/>
+                  <CreateTrip
+                    guidesData={guidesData}
+                    seeCreateTrip={seeCreateTrip}
+                    setSeeCreateTrip={setSeeCreateTrip}
+                    seeAllTrips={seeAllTrips}
+                    setSeeAllTrips={setSeeAllTrips}
+                    setTripData={setTripData}
+                  />
                 </div>
               </>
             )}
@@ -117,11 +124,19 @@ const AdminPanel = ({ loggedIn }) => {
               </>
             )}
 
-            {seeCreateGuide && <>
-              <div className="boats-container">
-                <CreateGuide />                
-              </div>
-            </>}
+            {seeCreateGuide && (
+              <>
+                <div className="boats-container">
+                  <CreateGuide
+                    seeCreateGuide={seeCreateGuide}
+                    setSeeCreateGuide={setSeeCreateGuide}
+                    seeCreateTrip={seeCreateTrip}
+                    setSeeCreateTrip={setSeeCreateTrip}
+                    setGuidesData={setGuidesData}
+                  />
+                </div>
+              </>
+            )}
           </div>
 
           <div className="overlay-about"></div>

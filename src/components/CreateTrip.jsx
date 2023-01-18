@@ -34,7 +34,7 @@ const CreateTrip = ({
 
   const handleCreateTrip = async (e) => {
     e.preventDefault();
-    const confirmation = confirm("Are you sure you want to create trip");
+    const confirmation = confirm("Are you sure you want to create trip?");
     if (!confirmation) return;
 
     const response = await facade.createTrip(tripToBeCreated);
@@ -69,6 +69,8 @@ const CreateTrip = ({
     <form>
       <div className="create-boat-component">
         <h2 className="text-center">Create trip</h2>
+
+        {/* Could upgrade it with: https://codepen.io/abdulmlik/pen/dJOJov */}
         <h4 className="text-white">Enter date</h4>
         <input type="text" placeholder="yyyy-mm-dd" onChange={onChange} id="date" />
 
