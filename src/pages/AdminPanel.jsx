@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
+import CreateGuide from "../components/CreateGuide";
 import CreateTrip from "../components/CreateTrip";
 import TripsAdminpanel from "../components/TripsAdminpanel";
 import facade from "../facades/apiFacade";
@@ -104,7 +105,7 @@ const AdminPanel = ({ loggedIn }) => {
             {seeCreateTrip && (
               <>
                 <div className="boats-container">
-                  <CreateTrip guidesData={guidesData}/>
+                  <CreateTrip guidesData={guidesData} seeCreateTrip={seeCreateTrip} setSeeCreateTrip={setSeeCreateTrip} seeAllTrips={seeAllTrips} setSeeAllTrips={setSeeAllTrips} setTripData={setTripData}/>
                 </div>
               </>
             )}
@@ -116,7 +117,11 @@ const AdminPanel = ({ loggedIn }) => {
               </>
             )}
 
-            {seeCreateGuide && <h1>CREATE GUIDE COMPONENT</h1>}
+            {seeCreateGuide && <>
+              <div className="boats-container">
+                <CreateGuide />                
+              </div>
+            </>}
           </div>
 
           <div className="overlay-about"></div>

@@ -230,7 +230,7 @@ const CreateAccountComponent = ({ setErrorMsg, errorMsg }) => {
               </div>
             </div>
             <button className="glow-on-hover create-button" onClick={performCreateUser}>
-              Create your EcoDrive account
+              Create your account
             </button>
           </form>
 
