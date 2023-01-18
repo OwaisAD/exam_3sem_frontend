@@ -125,6 +125,11 @@ function apiFacade() {
     return await fetch(URL + `/trips/${tripId}`, options).then(handleHttpErrors);
   };
 
+  const getAllGuides = async () => {
+    const options = makeOptions("GET", true);
+    return await fetch(URL + `/guides`, options).then(handleHttpErrors);
+  };
+
   const makeOptions = (method, addToken, body) => {
     var opts = {
       method: method,
@@ -160,6 +165,7 @@ function apiFacade() {
     addPersonToTrip,
     removePersonFromTrip,
     removeTripByTripId,
+    getAllGuides,
   };
 }
 const facade = apiFacade();

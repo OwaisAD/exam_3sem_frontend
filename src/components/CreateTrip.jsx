@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import facade from "../facades/apiFacade";
 
-const CreateTrip = ({ harbourData }) => {
+const CreateTrip = ({ guidesData }) => {
   const initialState = {
-    brand: "",
-    make: "",
-    name: "",
-    image: "",
+    date: "",
+    year: "",
+    location: "",
+    duration: "",
+    packingList: "",
     harbour: {
       id: 0,
     },
@@ -20,7 +21,7 @@ const CreateTrip = ({ harbourData }) => {
     const create = confirm("Are you sure you want to create trip");
     if (!create) return;
 
-    facade.createBoat(tripToBeCreated);
+    facade.createTrip(tripToBeCreated);
     setTripToBeCreated(initialState);
   };
 
@@ -37,49 +38,65 @@ const CreateTrip = ({ harbourData }) => {
     <form>
       <div className="create-boat-component">
         <h2 className="text-center">Create trip</h2>
-        <h4 className="text-white">Boat brand</h4>
+        <h4 className="text-white">Enter date</h4>
         <input
           type="text"
-          placeholder="Boat brand"
+          placeholder="yyyy/mm/dd"
           onChange={onChange}
           id="brand"
           value={tripToBeCreated.brand}
         />
 
-        <h4 className="text-white">Boat make</h4>
-        <input
-          type="text"
-          placeholder="Boat make"
-          onChange={onChange}
-          id="make"
-          value={tripToBeCreated.make}
-        />
+        <h4 className="text-white">Enter time</h4>
+        <select name="" id="" onChange={onChange}>
+          <option disabled selected>
+            Select a time
+          </option>
+          <option value="08:00:00">8:00</option>
+          <option value="09:00:00">9:00</option>
+          <option value="10:00:00">10:00</option>
+          <option value="11:00:00">11:00</option>
+          <option value="12:00">12:00</option>
+          <option value="13:00">13:00</option>
+          <option value="14:00">14:00</option>
+        </select>
 
-        <h4 className="text-white">Boat name</h4>
+        <h4 className="text-white">Location</h4>
         <input
           type="text"
-          placeholder="Boat name"
+          placeholder="Enter location"
           onChange={onChange}
           id="name"
           value={tripToBeCreated.name}
         />
 
-        <h4 className="text-white">Boat image</h4>
+        <h4 className="text-white">Duration</h4>
         <input
           type="text"
-          placeholder="Boat image"
+          placeholder="Enter duration"
           onChange={onChange}
           id="image"
           value={tripToBeCreated.image}
         />
 
-        <h4 className="text-white">Select a harbour</h4>
+        <h4 className="text-white">Packing list</h4>
+        <input
+          type="text"
+          placeholder="Enter packing list"
+          onChange={onChange}
+          id="image"
+          value={tripToBeCreated.image}
+        />
+
+        <h4 className="text-white">Select a Guide</h4>
         <select id="harbours" name="harbourlist" onChange={onChange}>
           <option value="" disabled selected>
-            Select a Harbour
+            Select a Guide
           </option>
-          {harbourData.map((harbour) => (
-            <option value={harbour.id}>{harbour.name}</option>
+          {guidesData.map((guide) => (
+            <option value={guide.id}>
+              {guide.profile}, {guide.gender}, {guide.birthYear}
+            </option>
           ))}
         </select>
         <Button style={{ marginTop: "5px" }} onClick={(e) => handleCreateTrip(e)}>

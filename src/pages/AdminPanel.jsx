@@ -6,6 +6,8 @@ import facade from "../facades/apiFacade";
 
 const AdminPanel = ({ loggedIn }) => {
   const [tripData, setTripData] = useState([]);
+  const [guidesData, setGuidesData] = useState([]);
+
   const [seeAllTrips, setSeeAllTrips] = useState(false);
   const [seeCreateTrip, setSeeCreateTrip] = useState(false);
   const [seeCreateGuide, setSeeCreateGuide] = useState(false);
@@ -19,6 +21,11 @@ const AdminPanel = ({ loggedIn }) => {
     fetchData();
 
     // fetch all guides
+    async function fetchGuides() {
+      const response = await facade.getAllGuides();
+      setGuidesData(response);
+    }
+    fetchGuides();
   }, []);
 
   return (
@@ -97,8 +104,7 @@ const AdminPanel = ({ loggedIn }) => {
             {seeCreateTrip && (
               <>
                 <div className="boats-container">
-                  {/* <CreateTrip harbourData={harbourData} /> */}
-                  <h1>CREATE TRIP COMPONENT</h1>
+                  <CreateTrip guidesData={guidesData}/>
                 </div>
               </>
             )}
